@@ -1,17 +1,16 @@
 import { useState } from 'react'
 import reactLogo from '../../assets/react.svg'
-import viteLogo from '/vite.svg'
 import './ExamplePage.css'
+import { useNavigate } from 'react-router-dom'
+import ExampleComponent from '../../components/ExampleComponent';
 
 export function ExamplePage() {
-  const [count, setCount] = useState(0)
+  const navigate = useNavigate();
+  const [count, setCount] = useState(0);
 
   return (
     <>
       <div className='flex flex-row justify-center'>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
@@ -21,12 +20,13 @@ export function ExamplePage() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
       </div>
+      <button onClick={() => navigate("/")}> send me back :&#40; </button>
+      <ExampleComponent/>
+
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        Click on the <code>Vite</code> and <code>React</code> logos to learn more
       </p>
     </>
   )
