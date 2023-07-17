@@ -17,12 +17,12 @@ export function ExamplePage() {
       </div>
       <h1 className='text-red-200 underline uppercase'>Ollie Bot</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={() => setCount((count) => count + 1)} className='bg-theme-black px-4 py-2 rounded-lg hover:outline'>
           count is {count}
         </button>
 
       </div>
-      <button onClick={() => navigate("/")}> send me back :&#40; </button>
+      <button onClick={() => navigate("/")} className='bg-theme-black px-4 py-2 rounded-lg hover:outline'> send me back :&#40; </button>
       <ExampleComponent/>
 
       <p className="read-the-docs">
