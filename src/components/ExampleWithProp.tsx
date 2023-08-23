@@ -1,19 +1,22 @@
 import PropTypes from 'prop-types';
+import { Question } from '../types';
 
 type Props = {
-  questionInfo: {
-    id: string,
-    question: string,
-    explanation: string,
-  }
+  questionInfo: Question
+  // questionInfo: {
+  //   id: string,
+  //   question: string,
+  //   explanation: string,
+  // }
 }
 
 function ExampleWithProp({questionInfo}: Props) {
+  console.log(questionInfo);
   return (
     <div className="flex-row bg-sky-950 w-100 rounded-xl m-4 p-2 hover:outline outline-offset-2 outline-blue-500">
       <div className="flex flex-row divide-x divide-pink-500">
         <div className="w-1/6 mr-2">
-          <p className="text-pink-500 font-bold">{questionInfo.id}</p>
+          <p className="text-pink-500 font-bold">{questionInfo.questionId}</p>
         </div>
         <div className="flex-col w-5/6">
           <p className="font-bold">{questionInfo.question}</p>
