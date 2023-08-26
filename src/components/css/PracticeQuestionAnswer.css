@@ -2,11 +2,14 @@
     display: inline-block;
     width: 20%;
     height: 30px;
-    font-size: 20px;
+    font-size: 22.5px;
     position: relative;
     bottom: 15%;
-    border: 1px solid blue;
     margin: auto;
+}
+
+.next-save:hover {
+    text-decoration: underline;
 }
 
 #question-answer-container {
@@ -17,11 +20,12 @@
     margin: auto;
     width: 100%;
     display: inline-block;
-    border: 1px solid green;
 }
 
 #question-container {
     margin: auto;
+    margin-left: 10px;
+    margin-right: 10px;
     border: 1px solid white;
 }
 
