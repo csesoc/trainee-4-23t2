@@ -4,18 +4,15 @@ import '../../components/PracticeQuestionAnswer'
 import { ExitPage } from "../../components/ExitButton";
 import PracticeQuestion from '../../components/PracticeQuestionAnswer';
 import { MdOutlineBookmark } from 'react-icons/md'
+import NextSave from '../../components/NextSave';
 
 export function PracticePage() {
   return (
     <>
       <ExitPage/>
-      <div id='question-answer-container' style={{display:'flex', width: '80%', height: '85vh', boxSizing: 'border-box', flexWrap: "wrap", margin: 'auto'}}>
+      <div id='question-answer-next-save-container'>
         <PracticeQuestion/>
-        <div id="button-container">
-          <button id="save-question" className="next-save"> <MdOutlineBookmark style={{display: "inline-block"}}/> save question </button>
-          <button id="next-question" className="next-save"> next question </button>
-        </div>
-
+        <NextSave/>
       </div>
     </>
   )

@@ -1,27 +1,3 @@
-.next-save {
-    display: inline-block;
-    width: 20%;
-    height: 30px;
-    font-size: 22.5px;
-    position: relative;
-    bottom: 15%;
-    margin: auto;
-}
-
-.next-save:hover {
-    text-decoration: underline;
-}
-
-#question-answer-container {
-    align-content: center;
-}
-
-#button-container {
-    margin: auto;
-    width: 100%;
-    display: inline-block;
-}
-
 #question-container {
     margin: auto;
     margin-left: 10px;
@@ -65,12 +41,4 @@
 
 #question-answer-display tr td:nth-of-type(2), #question-answer-display th:nth-of-type(2) {
     border-left: 1px solid white;
-}
-
-#save-question {
-    float: left;
-}
-
-#next-question {
-    float: right;
 }
