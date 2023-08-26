@@ -4,15 +4,13 @@ import '../../components/PracticeQuestionAnswer'
 import { ExitPage } from "../../components/ExitButton";
 import PracticeQuestion from '../../components/PracticeQuestionAnswer';
 import NextSave from '../../components/NextSave';
+import PracticeQuestionDisplay from '../../components/PracticeQuestionDisplay';
 
 export function PracticePage() {
   return (
     <>
       <ExitPage/>
-      <div id='question-answer-next-save-container'>
-        <PracticeQuestion/>
-        <NextSave/>
-      </div>
+      <PracticeQuestionDisplay/>
     </>
   )
 }
