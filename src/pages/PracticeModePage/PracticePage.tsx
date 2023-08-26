@@ -3,7 +3,6 @@ import '../../components/css/PracticeQuestionAnswer.css'
 import '../../components/PracticeQuestionAnswer'
 import { ExitPage } from "../../components/ExitButton";
 import PracticeQuestion from '../../components/PracticeQuestionAnswer';
-import { MdOutlineBookmark } from 'react-icons/md'
 import NextSave from '../../components/NextSave';
 
 export function PracticePage() {
