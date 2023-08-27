@@ -1,0 +1,9 @@
+.option {
+  width: 45%;
+  display: block;
+  height: 45%;
+  margin: 1.75%;
+  background: #EBC7E7;
+  border-radius: 15px;
+  color: black;
+}
