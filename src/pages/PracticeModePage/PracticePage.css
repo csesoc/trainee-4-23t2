@@ -1,0 +1,9 @@
+#question-answer-next-save-container {
+    display: flex; 
+    width: 80%;
+    height: 85vh;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    margin: auto;
+    align-content: center
+}
