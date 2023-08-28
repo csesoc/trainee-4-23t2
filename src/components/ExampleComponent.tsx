@@ -2,6 +2,7 @@ import { getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { database } from "../firebase";
 import ExampleWithProp from "./ExampleWithProp";
+import { Question, QDiff, QType, QTopic } from "../types";
 
 interface QuestionData {
     id: string,
@@ -38,10 +39,15 @@ function ExampleComponent() {
 
     // make a new questioncard for every item in the 1511 questionbank
     const listQuestions = data.map((q) => {
-        const qInfo = {
-            id: q.id,
+        const qInfo: Question = {
+            questionId: q.id,
             question: q.question,
             explanation: q.explanation,
+            correctAns: "None atm",
+            incorrectAns: ["S", "U", "S"],
+            questionType: [QType.MCQ, QType.SA],
+            difficulty: QDiff.Maddening,
+            topics: [QTopic.Variables]
         }
         return <ExampleWithProp key={`qCard${q.id}`} questionInfo={qInfo}/>
     })
