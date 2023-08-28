@@ -37,6 +37,7 @@ async function authenticateFireBase() {
 }
 
 async function writeToFireBase(sheetData) {
+    const db = await authenticateFireBase();
     for (let i = 1; i < sheetData.values.length; i++) {
         const row = sheetData.values[i];
 
@@ -45,7 +46,6 @@ async function writeToFireBase(sheetData) {
             break;
         }
 
-        const db = await authenticateFireBase();
         const post = {
             question: row[2],
             correctAns: row[3],
@@ -66,8 +66,6 @@ await writeToFireBase(sheetData);
 console.log("Done!");
 
 process.exit(0);
-
-
 
 
 
