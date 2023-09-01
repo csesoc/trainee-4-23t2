@@ -61,7 +61,7 @@ export function PracticePage() {
     });
 
     setData(dataArr);
-    if (!loading && dataArr) setLoading(false);
+    if (loading && dataArr) setLoading(false);
 
     if (dataArr[qCount].answered) {
       result =  <div id='question-answer-next-save-container'> <PracticeQuestionAnswer/> <NextSave/> </div>
