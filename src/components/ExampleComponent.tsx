@@ -31,10 +31,10 @@ function ExampleComponent() {
                 question: docData.question ?? "no question data",
                 explanation: docData.explanation ?? "no explanation data",
             }
-            console.log(questionInfo);
             questionData.push(questionInfo);
         });
         setData(questionData);
+        console.log(data);
     }
 
     // make a new questioncard for every item in the 1511 questionbank

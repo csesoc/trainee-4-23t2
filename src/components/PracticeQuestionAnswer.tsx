@@ -1,4 +1,4 @@
-export default function PracticeQuestion() {
+export default function PracticeQuestionAnswer() {
     return (
         <div id="question-container" className="m-4 bg-theme-black px-4 py-2">
             <table id="question-answer-display">
