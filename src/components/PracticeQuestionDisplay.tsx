@@ -22,15 +22,19 @@ function onOptionClick(setAnswer: Function) {
   setAnswer(true);
 }
 
+function buttonGenerator(value: string, count: number, setAnswer: Function) {
+  return <button className="option" key={`option${count}`} onClick={() => { onOptionClick(setAnswer)}}>{value}</button>
+}
+
 export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayProps) {
   let qData = props.questionData;
   const buttons : JSX.Element[] = [];
   let count = 0;
   qData.incorrectAns.forEach((iA) => {
-    buttons.push(<button className="option" key={`option${count}`} onClick={() => { onOptionClick(props.setAnswer)}}>{iA}</button>);
+    buttons.push(buttonGenerator(iA, count, props.setAnswer));
     count++;
   });
-  buttons.push(<button className="option" key={`option${count}`} onClick={() => { onOptionClick(props.setAnswer)}}>{qData.correctAns}</button>);
+  buttons.push(buttonGenerator(qData.correctAns, count, props.setAnswer));
   shuffleArray(buttons);
 
   return (
@@ -39,7 +43,7 @@ export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayPr
         <div id="question-headers">
           <h1>{qData.id}</h1>
           <TagContainer tagNames={qData.topics}/>
-          <DotContainer difficulty={1}/>
+          <DotContainer difficulty={qData.difficulty}/>
         </div>
         <div id="question-content">
           {qData.question}
