@@ -3,10 +3,12 @@ import TagContainer from './TagContainer';
 import DotContainer from './DotContainer';
 import './css/Option.css';
 import { QuestionData } from '../types';
+import { getDataStore, setDataStore } from '../localDataStore';
 
 interface PracticeQuestionDisplayProps {
   questionData: QuestionData;
   setAnswer: Function;
+  updateData: Function;
 }
 
 // credit to stack overflow for this :)
@@ -17,13 +19,14 @@ function shuffleArray(array: JSX.Element[]) {
   }
 }
 
-function onOptionClick(setAnswer: Function) {
-  localStorage.setItem('answered', 'true');
+function onOptionClick(setAnswer: Function, updateData: Function) {
   setAnswer(true);
+  updateData();
+
 }
 
-function buttonGenerator(value: string, count: number, setAnswer: Function) {
-  return <button className="option" key={`option${count}`} onClick={() => { onOptionClick(setAnswer)}}>{value}</button>
+function buttonGenerator(value: string, count: number, setAnswer: Function, updateData: Function) {
+  return <button className="option" key={`option${count}`} onClick={() => { onOptionClick(setAnswer, updateData)}}>{value}</button>
 }
 
 export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayProps) {
@@ -31,10 +34,10 @@ export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayPr
   const buttons : JSX.Element[] = [];
   let count = 0;
   qData.incorrectAns.forEach((iA) => {
-    buttons.push(buttonGenerator(iA, count, props.setAnswer));
+    buttons.push(buttonGenerator(iA, count, props.setAnswer, props.updateData));
     count++;
   });
-  buttons.push(buttonGenerator(qData.correctAns, count, props.setAnswer));
+  buttons.push(buttonGenerator(qData.correctAns, count, props.setAnswer, props.updateData));
   shuffleArray(buttons);
 
   return (

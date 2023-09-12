@@ -3,87 +3,103 @@ import '../../components/css/PracticeQuestionAnswer.css'
 import '../../components/PracticeQuestionAnswer'
 import { ExitPage } from "../../components/ExitButton";
 import PracticeQuestionAnswer from '../../components/PracticeQuestionAnswer';
-import NextSave from '../../components/NextSave';
+
 import PracticeQuestionDisplay from '../../components/PracticeQuestionDisplay';
 import { useEffect, useState } from 'react';
 
 import { database } from "../../firebase";
-import firebase from 'firebase/app';
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { QuestionData } from '../../types'
+import { QuestionData } from '../../types';
 
-export function PracticePage() {
-  const [data, setData] = useState<QuestionData[]>([]);
+import { getDataStore, setDataStore } from '../../localDataStore';
 
+interface PracticePageProps {
+  topic: string;
+}
+
+export function PracticePage(props: PracticePageProps) {
+  let localised = localStorage.getItem('qData') as string;
+  let [loading, setLoading] = useState<boolean>(!localised);
+  const [data, setData] = useState<QuestionData[]>(!localised ? [] : JSON.parse(localised));
   let localQCount : any = localStorage.getItem('qCount') as string;
   if (!localQCount) {
     localStorage.setItem('qCount', '0');
     localQCount = '0';
   }
-  localQCount = parseInt(localQCount);
 
-  const [qCount, setQCount] = useState<number>(localQCount); 
+  const [qCount, setQCount] = useState<number>(localQCount === null ? 0 : parseInt(localQCount)); 
 
-  const [loading, setLoading] = useState<boolean>(true);
-  const [answered, setAnswered] = useState<boolean>(false);
+  function updateData() {
+    let localisedData = localStorage.getItem('qData') as string;
+    let jsonifiedData : QuestionData[] = JSON.parse(localisedData);
 
-  let result;
+    jsonifiedData[parseInt(localQCount)].answered = true;
 
+    setData(jsonifiedData);
+
+    localStorage.setItem('qData', JSON.stringify(jsonifiedData));
+  }
+
+
+  /*
+
+  console.log(data);
+
+  if (data.length > 0) {
+    let t = JSON.stringify(getDataStore().qData[qCount].answered);
+    localStorage.setItem('answered', t);
+    localAnswered = t;
+  }*/
+
+  console.log(data);
+
+  const [answered, setAnswered] = useState<boolean>(!data.length ? false : data[qCount].answered);
+  
   useEffect(() => {
     async function RetrieveQuestions(topic: string) {
       setLoading(true);
     
       const collectRef = collection(database, '1511');
+
+      if (data.length > 0) {
+        setLoading(false);
+        return;
+      }
   
       const questions = await getDocs(query(collectRef, where('topics', 'array-contains', topic)));
   
       let dataArr : QuestionData[] = [];
   
       questions.forEach((doc) => {
-        let qData = doc.data();
+        let docData = doc.data();
         dataArr.push({
           id: doc.id,
-          correctAns: qData.correctAns, 
-          difficulty: qData.difficulty,
-          explanation: qData.explanation,
-          incorrectAns: qData.incorrectAns,
-          question: qData.question,
-          questionType: qData.questionType,
-          topics: qData.topics,
+          correctAns: docData.correctAns, 
+          difficulty: docData.difficulty,
+          explanation: docData.explanation,
+          incorrectAns: docData.incorrectAns,
+          question: docData.question,
+          questionType: docData.questionType,
+          topics: docData.topics,
           answered: false
         });
       });
   
       setData(dataArr);
       setLoading(false);
+      localStorage.setItem('qData', JSON.stringify(dataArr));
     }
-    RetrieveQuestions('Arrays');
+
+    if (getDataStore().qData.length < 1) {
+      RetrieveQuestions('Arrays');
+    }
   }, []);
-
-  /*
-  useEffect(() => {
-    if (data.length > 0) {
-      let currQ = parseInt(localStorage.getItem('qCount') as string);
-      console.log(data);
-      if (data[currQ].answered) setAnswered(true);
-      setLoading(false);
-    }
-  }, [data]);*/
-
-  localStorage.setItem('qData', JSON.stringify(data));
-  
-  /*
-  if (data.length > 0) {
-    localQCount = parseInt(localStorage.getItem('qCount') as string);
-    setAnswered(data[localQCount].answered);
-    setQCount(qCount);
-  }*/
 
   return (
     <>
       <ExitPage/>
       {loading && "Loading..."}
-      {!loading && (answered ? <PracticeQuestionAnswer questionData={data[qCount]}/> : <PracticeQuestionDisplay questionData={data[qCount]} setAnswer={setAnswered}/>)}
+      {!loading && (answered ? <PracticeQuestionAnswer questionData={data[qCount]} setQCount={setQCount} dataLength={data.length}/> : <PracticeQuestionDisplay questionData={data[qCount]} setAnswer={setAnswered} updateData={updateData}/>)}
     </>
   )
 }

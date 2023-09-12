@@ -2,7 +2,9 @@ import NextSave from "./NextSave";
 import { QuestionData } from '../types';
 
 interface PracticeQuestionAnswerProps {
-  questionData: QuestionData
+  questionData: QuestionData;
+  setQCount: Function;
+  dataLength: number;
 }
 
 export default function PracticeQuestionAnswer(props: PracticeQuestionAnswerProps) {
@@ -25,7 +27,7 @@ export default function PracticeQuestionAnswer(props: PracticeQuestionAnswerProp
           </tbody>
         </table>
       </div>
-      <NextSave/>
+      <NextSave setQCount={props.setQCount} dataLength={props.dataLength}/>
     </div>
   );
 }
