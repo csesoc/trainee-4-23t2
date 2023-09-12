@@ -34,7 +34,6 @@ function ExampleComponent() {
             questionData.push(questionInfo);
         });
         setData(questionData);
-        console.log(data);
     }
 
     // make a new questioncard for every item in the 1511 questionbank
