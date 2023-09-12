@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import { ExamplePage } from "./pages/ExamplePage/ExamplePage"
 import { LandingPage } from "./pages/LandingPage"
-import { UserStatPage } from "./pages/UserStatPage"
+import UserStatPage from "./pages/UserStatPage"
 
 export function App() {
     return (
