@@ -31,7 +31,6 @@ function ExampleComponent() {
                 question: docData.question ?? "no question data",
                 explanation: docData.explanation ?? "no explanation data",
             }
-            console.log(questionInfo);
             questionData.push(questionInfo);
         });
         setData(questionData);
