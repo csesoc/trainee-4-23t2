@@ -48,8 +48,6 @@ const UserStatPage = () => {
                     }
                 }
             });
-    
-            const x = Object.entries(topicData)
             let best = {
                 topic: "",
                 ratio: -5,
@@ -62,7 +60,7 @@ const UserStatPage = () => {
                 answered: 0,
                 total: 0
             }
-            x.forEach(([key, value]) => {
+            Object.entries(topicData).forEach(([key, value]) => {
                 const sum = value.answered / value.total
                 const data = {
                     topic: key,
