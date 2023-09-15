@@ -38,6 +38,6 @@ export default function Tag(props: TagProps) {
   }
 
   return (
-    <div className="tag" style={{backgroundColor:colour}}>{tagName}</div>
+    <div className="tag" style={{backgroundColor:colour, translate: "0px 2px", borderRadius: "0.375rem"}}>{tagName}</div>
   );
 }

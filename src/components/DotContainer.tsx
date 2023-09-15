@@ -16,7 +16,7 @@ export default function DotContainer(props: DotContainerProps) {
   }
 
   return (
-    <div id="dot-container" style={{fontSize: "20px", color: "#E87195"}}>
+    <div id="dot-container" style={{fontSize: "20px", color: "#E87195", transform: "rotate(-90deg)", marginTop: "-10px"}}>
       {dots}
     </div>
   );
