@@ -1,4 +1,3 @@
-import './css/PracticeQuestionDisplay.css'
 import TagContainer from './TagContainer';
 import DotContainer from './DotContainer';
 import './css/Option.css';
@@ -75,7 +74,7 @@ function onOptionClick(setAnswer: Function, updateData: Function, qData: Questio
 }
 
 function buttonGenerator(value: string, count: number, setAnswer: Function, updateData: Function, qData: QuestionData) {
-  return <button className="option" key={`option${count}`} onClick={() => { onOptionClick(setAnswer, updateData, qData)}}>{value}</button>
+  return <button className="option text-black bg-[#EBC7E7] w-[30%] h-20 m-[1.70%] rounded-lg text-xl" key={`option${count}`} onClick={() => { onOptionClick(setAnswer, updateData, qData)}}>{value}</button>
 }
 
 export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayProps) {
@@ -90,14 +89,14 @@ export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayPr
   shuffleArray(buttons);
 
   return (
-    <div id="question-options-container">
-      <div id='question-display' className='m-4 bg-theme-black px-4 py-2'>
-        <div id="question-headers">
-          <h1>{qData.id}</h1>
+    <div id="question-options-container" className="translate-y-2/3">
+      <div id='question-display' className="bg-theme-black bg-opacity-80 rounded-3xl m-auto w-[800px] my-5 py-5">
+        <div id="question-headers" className="flex flex-row space-between justify-evenly pt-6">
+          <h1 className="text-[25px] -translate-x-[103px]">{qData.id}</h1>
           <TagContainer tagNames={qData.topics}/>
           <DotContainer difficulty={qData.difficulty}/>
         </div>
-        <div id="question-content">
+        <div id="question-content" className="pb-6 text-xl -translate-x-[15px]">
           {qData.question}
         </div>
       </div>
