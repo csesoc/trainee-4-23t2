@@ -1,10 +1,9 @@
 import React, {useState, createContext, useContext} from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { TopicSelection } from "./TopicSelection";
 
 
 
-export const modeContext = createContext("practice");
 
 
 export function NewLandingPage() {
@@ -32,21 +31,25 @@ export function NewLandingPage() {
 
             <div className="flex flex-col justify-center h-screen md:flex-row">
 
-                <modeContext.Provider value="practice">
+                    <Link to="/topic_selection" state={{mode: "practice"}}>
                     <button onClick={() =>handleClick()}
                     className="h-3/6 w-4/6 bg-theme-black m-20 rounded-lg text-xl text-theme-pink font-semibold md:w-2/6 hover:bg-theme-red">
                         <h1>Practice Mode</h1>
                     </button>
+                    </Link>
+                    
 
-                </modeContext.Provider>
+                    
                 
-                <modeContext.Provider value="test">
-
+               
+                    <Link to="/topic_selection" state={{mode:"test"}}>
                     <button onClick={() => handleClick()}
                     className="h-3/6 w-4/6 bg-theme-black m-20 rounded-lg text-xl text-theme-pink font-semibold md:w-2/6 hover:bg-theme-red">
                         <h1>Test Mode</h1>
                     </button>
-                </modeContext.Provider>
+                    </Link>
+                    
+                
                 
                 
             </div>

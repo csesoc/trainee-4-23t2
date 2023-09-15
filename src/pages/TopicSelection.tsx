@@ -1,7 +1,6 @@
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Grid } from "@mui/material"
 import React, {useState} from 'react'
-import { modeContext } from "./LandingPage"
 
 //Imported icons
 import {BiLink} from "react-icons/bi"
@@ -14,8 +13,39 @@ import {BiSolidRightArrow} from "react-icons/bi"
 export function TopicSelection() {
     
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    let location = useLocation();
 
+    const mode = location.state;
+
+    const [topics, setTopics] = useState<String[]>([]);
+    const [difficulty, setDifficulty] = useState<number>(0);
+
+    const addTopic = (newTopic : string) => {
+        console.log(newTopic);
+        
+        let copy = [...topics];
+
+        if (topics.includes(newTopic)) {
+            copy = topics.filter(x => x != newTopic)
+        } else {
+            copy.push(newTopic);
+        }
+
+        setTopics(copy);
+
+        console.log(copy)
+
+       
+    }
+
+   
+    const changeDiff = (diff:number) => {
+        console.log("hi"+difficulty)
+        setDifficulty(diff);
+        
+        console.log(difficulty)
+    }
     
 
     return (
@@ -29,20 +59,26 @@ export function TopicSelection() {
                 justifyContent="center"
                 alignItems="center">
                 <Grid item xs={8} md={4}>
-                    <button className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink">
+                    <button 
+                    onClick={() => addTopic("linked_lists")}
+                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black">
                         <BiLink style={{fontSize:'100px', margin:'auto'}}/>
                         <h1>Linked Lists</h1>
                     </button>
                 </Grid>
                 <Grid item xs={8} md={4}>
-                    <button className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink">
+                    <button 
+                    onClick={() => addTopic("arrays")}
+                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black">
                         <MdDataArray style={{fontSize:"100px", margin:"auto"}}/>
                         <h1>Arrays</h1>
                     </button>
                 </Grid>
 
                 <Grid item xs={8} md={4}>
-                    <button className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink">
+                    <button 
+                    onClick={() => addTopic("others")}
+                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black">
                         <BsThreeDots style={{fontSize:"100px", margin:"auto"}}/>
                         <h1>Others</h1>
                     </button>
@@ -60,20 +96,26 @@ export function TopicSelection() {
                 justifyContent="center"
                 alignItems="center">
                 <Grid item xs={8} md={4}>
-                    <button className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink">
+                    <button 
+                    onClick={() => changeDiff(1)}
+                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black">
                         <TbFishBone style={{fontSize:'100px', margin:'auto'}}/>
                         
                     </button>
                 </Grid>
                 <Grid item xs={8} md={4}>
-                    <button className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-3xl font-semibold text-theme-pink">
+                    <button 
+                    onClick={() => changeDiff(2)}
+                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-3xl font-semibold text-theme-pink active:bg-theme-black">
                         <TbFishBone style={{fontSize:'70px', margin:'auto'}}/>
                         <TbFishBone style={{fontSize:'70px', margin:'auto'}}/>
                     </button>
                 </Grid>
 
                 <Grid item xs={8} md={4}>
-                    <button className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink">
+                    <button 
+                    onClick={() => changeDiff(3)}
+                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black">
                         <TbFishBone style={{fontSize:'50px', margin:'auto'}}/>
                         <TbFishBone style={{fontSize:'50px', margin:'auto'}}/>
                         <TbFishBone style={{fontSize:'50px', margin:'auto'}}/>

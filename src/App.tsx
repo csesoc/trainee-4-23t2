@@ -9,7 +9,7 @@ export function App() {
         <Routes>
             <Route path="/" element={<NewLandingPage/>}/>
             <Route path="/example" element={<ExamplePage/>}/>
-            <Route path="/practice" element={<PracticePage/>}></Route>
+            <Route path="/practice" element={<PracticePage topic=""/>}></Route>
             <Route path="/topic_selection" element={<TopicSelection/>}></Route>
         </Routes>
     )
