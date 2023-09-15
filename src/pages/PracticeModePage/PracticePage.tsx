@@ -40,17 +40,6 @@ export function PracticePage(props: PracticePageProps) {
     localStorage.setItem('qData', JSON.stringify(jsonifiedData));
   }
 
-
-  /*
-
-  console.log(data);
-
-  if (data.length > 0) {
-    let t = JSON.stringify(getDataStore().qData[qCount].answered);
-    localStorage.setItem('answered', t);
-    localAnswered = t;
-  }*/
-
   console.log(data);
 
   const [answered, setAnswered] = useState<boolean>(!data.length ? false : data[qCount].answered);

@@ -2,8 +2,7 @@ import './css/PracticeQuestionDisplay.css'
 import TagContainer from './TagContainer';
 import DotContainer from './DotContainer';
 import './css/Option.css';
-import { QuestionData } from '../types';
-import { getDataStore, setDataStore } from '../localDataStore';
+import { QuestionData, UserStats } from '../types';
 
 interface PracticeQuestionDisplayProps {
   questionData: QuestionData;
@@ -19,14 +18,64 @@ function shuffleArray(array: JSX.Element[]) {
   }
 }
 
-function onOptionClick(setAnswer: Function, updateData: Function) {
-  setAnswer(true);
-  updateData();
+function updateStats(qData: QuestionData) {
+  let userStats = localStorage.getItem('userStats');
+  let userStatJSON : UserStats;
 
+  if (userStats === null || userStats.length === 0) {
+    let newUserStat : UserStats = {
+      numNormal: 0,
+      numHard: 0,
+      numMaddening: 0,
+      numArrayQ: 0,
+      numPointerQ: 0,
+      numOtherQ: 0
+    };
+    userStatJSON = newUserStat;
+  } else {
+    userStatJSON = JSON.parse(userStats);
+  }
+
+  switch (qData.difficulty) {
+    case 1:
+      userStatJSON.numNormal++;
+      break;
+    case 2:
+      userStatJSON.numHard++;
+      break;
+    case 3:
+      userStatJSON.numMaddening++;
+      break;
+    default:
+      break;
+  }
+
+  for (const topic of qData.topics) {
+    let lowerTopic = topic.toLowerCase();
+    switch (lowerTopic) {
+      case "arrays":
+        userStatJSON.numArrayQ++;
+        break;
+      case "pointers":
+        userStatJSON.numPointerQ++;
+        break;
+      default:
+        userStatJSON.numOtherQ++;
+        break;
+    }
+  }
+
+  localStorage.setItem('userStats', JSON.stringify(userStatJSON));
 }
 
-function buttonGenerator(value: string, count: number, setAnswer: Function, updateData: Function) {
-  return <button className="option" key={`option${count}`} onClick={() => { onOptionClick(setAnswer, updateData)}}>{value}</button>
+function onOptionClick(setAnswer: Function, updateData: Function, qData: QuestionData) {
+  setAnswer(true);
+  updateData();
+  updateStats(qData);
+}
+
+function buttonGenerator(value: string, count: number, setAnswer: Function, updateData: Function, qData: QuestionData) {
+  return <button className="option" key={`option${count}`} onClick={() => { onOptionClick(setAnswer, updateData, qData)}}>{value}</button>
 }
 
 export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayProps) {
@@ -34,10 +83,10 @@ export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayPr
   const buttons : JSX.Element[] = [];
   let count = 0;
   qData.incorrectAns.forEach((iA) => {
-    buttons.push(buttonGenerator(iA, count, props.setAnswer, props.updateData));
+    buttons.push(buttonGenerator(iA, count, props.setAnswer, props.updateData, qData));
     count++;
   });
-  buttons.push(buttonGenerator(qData.correctAns, count, props.setAnswer, props.updateData));
+  buttons.push(buttonGenerator(qData.correctAns, count, props.setAnswer, props.updateData, qData));
   shuffleArray(buttons);
 
   return (
