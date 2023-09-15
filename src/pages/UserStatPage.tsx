@@ -93,9 +93,9 @@ const UserStatPage = () => {
                     <p>
                         Keep on working on {worst.topic}! You’ve attempted {worst.answered} out of {worst.total} questions.
                     </p>
-                    <p>
+                    {/* <p>
                         Your fastest test time is x:xx, which is 14% faster than your previous record of x:xx.
-                    </p>
+                    </p> */}
                 </div>
             </div>
             <div className="">
