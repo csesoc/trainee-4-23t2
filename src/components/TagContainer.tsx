@@ -14,7 +14,7 @@ export default function TagContainer(props: TagContainerProps) {
     i++;
   }
   return (
-    <div id="tags-container">
+    <div id="tags-container" style={{translate: "-150px"}}>
       {tags}
     </div>
   );
