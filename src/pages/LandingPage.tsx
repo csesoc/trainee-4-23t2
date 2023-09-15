@@ -29,25 +29,30 @@ export function NewLandingPage() {
 
 
 
-            <div className="flex flex-col justify-center h-screen md:flex-row">
+            <div className=" h-screen md:flex-row">
 
-                    <Link to="/topic_selection" state={{mode: "practice"}}>
+                <Link to="/topic_selection" state={{mode: "practice"}}>
                     <button onClick={() =>handleClick()}
-                    className="h-3/6 w-4/6 bg-theme-black m-20 rounded-lg text-xl text-theme-pink font-semibold md:w-2/6 hover:bg-theme-red">
+                    className="h-3/6 w-4/6 bg-theme-black m-20 rounded-xl text-xl text-theme-pink font-semibold md:w-2/6 hover:bg-theme-red">
+                        
                         <h1>Practice Mode</h1>
                     </button>
-                    </Link>
+                </Link>
+                    
                     
 
                     
                 
                
-                    <Link to="/topic_selection" state={{mode:"test"}}>
-                    <button onClick={() => handleClick()}
-                    className="h-3/6 w-4/6 bg-theme-black m-20 rounded-lg text-xl text-theme-pink font-semibold md:w-2/6 hover:bg-theme-red">
-                        <h1>Test Mode</h1>
+                <Link to="/topic_selection" state={{mode:"test"}} >
+                    <button onClick={() => handleClick()} 
+                    className="h-3/6 w-4/6 bg-theme-black m-20 rounded-xl text-xl text-theme-pink font-semibold md:w-2/6 hover:bg-theme-red">
+                        
+                            <h1>Test Mode</h1>
+                       
+                       
                     </button>
-                    </Link>
+                </Link>
                     
                 
                 
