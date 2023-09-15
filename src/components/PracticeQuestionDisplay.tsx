@@ -89,14 +89,14 @@ export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayPr
   shuffleArray(buttons);
 
   return (
-    <div id="question-options-container" className="translate-y-1/3">
+    <div id="question-options-container" className="translate-y-2/3">
       <div id='question-display' className="bg-theme-black bg-opacity-80 rounded-3xl m-auto w-[800px] my-5 py-5">
         <div id="question-headers" className="flex flex-row space-between justify-evenly pt-6">
-          <h1 className="text-[25px] -translate-x-[65px]">{qData.id}</h1>
+          <h1 className="text-[25px] -translate-x-[103px]">{qData.id}</h1>
           <TagContainer tagNames={qData.topics}/>
           <DotContainer difficulty={qData.difficulty}/>
         </div>
-        <div id="question-content" className="pb-6 text-xl -translate-x-[84px]">
+        <div id="question-content" className="pb-6 text-xl -translate-x-[15px]">
           {qData.question}
         </div>
       </div>
