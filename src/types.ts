@@ -74,3 +74,12 @@ export interface QuestionData {
     topics: string[];
     answered: boolean;
 }
+
+export interface UserStats {
+    numNormal: number;
+    numHard: number;
+    numMaddening: number;
+    numArrayQ: number;
+    numPointerQ: number;
+    numOtherQ: number;
+}
