@@ -9,15 +9,27 @@ type Counter = {
 }
 
 const UserStatPage = () => {
-    const num_challenging = parseInt(localStorage.getItem('num-challenging')||'0')
-    const num_hard = parseInt(localStorage.getItem('num-hard')||'0')
-    const num_medium = parseInt(localStorage.getItem('num-medium')||'0')
-    const num_easy = parseInt(localStorage.getItem('num-easy')||'0')
+    const [best, setBest] = useState({
+        topic: "",
+        ratio: -5,
+        answered: 0,
+        total: 0
+    })
+    const [worst, setWorst] = useState({
+        topic: "",
+        ratio: 2,
+        answered: 0,
+        total: 0
+    })
+    const data = JSON.parse(localStorage.getItem('userStats') || "0")
+
+    const { numNormal, numHard, numMaddening } = data;
 
     const topicData:  { [topic: string]: Counter } = {}
 
-    topicData.Arrays = {"answered":  parseInt(localStorage.getItem('num-array-q')||'4'), "total": 0}
-    topicData.Pointers = {"answered":  parseInt(localStorage.getItem('num-pointer-q')||'2'), "total": 0}
+    topicData.Arrays = {"answered": data.numArrayQ, "total": 0}
+    topicData.Pointers = {"answered":  data.numPointerQ, "total": 0}
+    topicData.Other = {"answered":  data.OtherQ, "total": 0}
     
 
     useEffect(() => {
@@ -38,28 +50,39 @@ const UserStatPage = () => {
             });
     
             const x = Object.entries(topicData)
-            let best = {"topic":"", "ratio" : -1}
-            let worst = {"topic":"", "ratio" : 10}
+            let best = {
+                topic: "",
+                ratio: -5,
+                answered: 0,
+                total: 0
+            }
+            let worst = {
+                topic: "",
+                ratio: 2,
+                answered: 0,
+                total: 0
+            }
             x.forEach(([key, value]) => {
                 const sum = value.answered / value.total
-                console.log(sum)
+                const data = {
+                    topic: key,
+                    ratio: sum,
+                    answered: value.answered,
+                    total: value.total
+                }
                 if (sum > best.ratio){
-                    best.topic = key
-                    best.ratio = sum
+                    best = data
                 } 
                 if (sum < worst.ratio) {
-                    worst.topic = key
-                    worst.ratio = sum
+                    worst = data
                 }
               });
-            console.log("Best", best)
-            console.log("Worst", worst)
+            setWorst(worst)
+            setBest(best)
         })
 
 
     }
-
-    console.log(topicData)
 
     return (
         <div className="bg-theme-black flex mt-20 p-20 rounded-xl justify-center gap-10">
@@ -67,10 +90,10 @@ const UserStatPage = () => {
                 <h3 className="text-3xl font-bold mb-8">Damn you suck</h3>
                 <div className="text-left text-lg">
                     <p>
-                        Your best topic was Arrays, where you attempted 60 out of 69 questions.
+                        Your best topic was {best.topic}, where you attempted {best.answered} out of {best.total} questions.
                     </p>
                     <p>
-                        Keep on working on loops! You’ve attempted 10 out of 40 questions.
+                        Keep on working on {worst.topic}! You’ve attempted {worst.answered} out of {worst.total} questions.
                     </p>
                     <p>
                         Your fastest test time is x:xx, which is 14% faster than your previous record of x:xx.
@@ -80,10 +103,10 @@ const UserStatPage = () => {
             <div className="">
                 <h3 className="text-3xl mb-8 font-bold"> Your Stats</h3>
                 <div className="grid grid-cols-2 gap-10 justify-items-center">
-                    <UserStatCard name="Challenging Questions" number={num_challenging} style="bg-theme-pink"></UserStatCard>
-                    <UserStatCard name="Hard Questions" number={num_hard} style="bg-slate-500"></UserStatCard>
-                    <UserStatCard name="Medium Questions" number={num_medium} style="bg-purple-400"></UserStatCard>
-                    <UserStatCard name="Easy Questions" number={num_easy} style="bg-theme-blue"></UserStatCard>
+                    <UserStatCard name="Maddening Questions" number={numMaddening} style="bg-theme-pink"></UserStatCard>
+                    <UserStatCard name="Hard Questions" number={numHard} style="bg-slate-500"></UserStatCard>
+                    <UserStatCard name="Normal Questions" number={numNormal} style="bg-purple-400"></UserStatCard>
+                    <UserStatCard name="Easy Questions" number={0} style="bg-theme-blue"></UserStatCard>
                 </div>
             </div>
         </div>

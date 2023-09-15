@@ -62,3 +62,24 @@ export type Filters = {
 }
 
 // etc. (feel free to add more!)
+
+export interface QuestionData {
+    id: string;
+    correctAns: string;
+    difficulty: number;
+    explanation: string;
+    incorrectAns: string[];
+    question: string;
+    questionType: string[];
+    topics: string[];
+    answered: boolean;
+}
+
+export interface UserStats {
+    numNormal: number;
+    numHard: number;
+    numMaddening: number;
+    numArrayQ: number;
+    numPointerQ: number;
+    numOtherQ: number;
+}

@@ -23,6 +23,8 @@ export function ExamplePage() {
 
       </div>
       <button onClick={() => navigate("/")} className='bg-theme-black px-4 py-2 rounded-lg hover:outline'> send me back :&#40; </button>
+      <button onClick={() => navigate("/practice")} className='bg-theme-black px-4 py-2 rounded-lg hover:outline'> Practice Page:&#40; </button>
+      
       <ExampleComponent/>
 
       <p className="read-the-docs">

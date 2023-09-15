@@ -1,0 +1,27 @@
+.next-save {
+    display: inline-block;
+    width: 20%;
+    height: 30px;
+    font-size: 22.5px;
+    position: relative;
+    bottom: 15%;
+    margin: auto;
+}
+
+.next-save:hover {
+    text-decoration: underline;
+}
+
+#button-container {
+    margin: auto;
+    width: 100%;
+    display: inline-block;
+}
+
+#save-question {
+    float: left;
+}
+
+#next-question {
+    float: right;
+}
