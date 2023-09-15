@@ -48,11 +48,11 @@ async function writeToFireBase(sheetData) {
 
         const post = {
             question: row[2],
-            correctAns: row[3],
+            correctAns: row[3].replace(/"/g, ""),
             incorrectAns: JSON.parse(row[4]),
             explanation: row[5],
             questionType: row[6].split(','),
-            difficulty: row[7],
+            difficulty: parseInt(row[7]),
             topics: row[8].split(',')
         };
     

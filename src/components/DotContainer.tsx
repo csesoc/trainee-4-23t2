@@ -9,9 +9,9 @@ export default function DotContainer(props: DotContainerProps) {
 
   for (let i = 1; i <= 3; i++) {
     if (i <= props.difficulty) {
-      dots.push(<GoDotFill className='dot'/>);
+      dots.push(<GoDotFill className='dot' key={`dot${i}`} />);
     } else {
-      dots.push(<GoDot className='dot'/>);
+      dots.push(<GoDot className='dot' key={`dot${i}`} />);
     }
   }
 

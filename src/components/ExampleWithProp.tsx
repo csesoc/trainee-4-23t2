@@ -11,7 +11,6 @@ type Props = {
 }
 
 function ExampleWithProp({questionInfo}: Props) {
-  console.log(questionInfo);
   return (
     <div className="flex-row bg-sky-950 w-100 rounded-xl m-4 p-2 hover:outline outline-offset-2 outline-blue-500">
       <div className="flex flex-row divide-x divide-pink-500">
