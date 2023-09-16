@@ -3,10 +3,9 @@ import { Grid } from "@mui/material"
 import React, {useState} from 'react'
 
 //Imported icons
-import {BiLink} from "react-icons/bi"
 import { MdDataArray } from "react-icons/md"
 import {BsThreeDots} from "react-icons/bs"
-import {TbFishBone} from "react-icons/tb"
+import {TbFishBone, TbPointerStar} from "react-icons/tb"
 import {BiSolidRightArrow} from "react-icons/bi"
 
 
@@ -112,7 +111,7 @@ export function TopicSelection() {
                     <button 
                     onClick={() => addTopic("Pointers")}
                     className={`${listSelected ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink `}>
-                        <BiLink style={{fontSize:'100px', margin:'auto'}}/>
+                        <TbPointerStar style={{fontSize:'100px', margin:'auto'}}/>
                         <h1>Pointers</h1>
                     </button>
                 </Grid>

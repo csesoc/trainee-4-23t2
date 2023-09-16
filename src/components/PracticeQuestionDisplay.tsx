@@ -1,6 +1,5 @@
 import TagContainer from './TagContainer';
 import DotContainer from './DotContainer';
-import './css/Option.css';
 import { QuestionData, UserStats } from '../types';
 
 interface PracticeQuestionDisplayProps {
@@ -80,7 +79,7 @@ function onOptionClick(value: string, setAnswer: Function, updateData: Function,
 }
 
 function buttonGenerator(value: string, count: number, setAnswer: Function, updateData: Function, qData: QuestionData, setIsCorrect:Function) {
-  return <button className="option text-black bg-[#EBC7E7] w-[30%] h-20 m-[1.70%] rounded-lg text-xl" key={`option${count}`} onClick={() => { onOptionClick(value, setAnswer, updateData, qData, setIsCorrect)}}>{value}</button>
+  return <button className="text-black bg-[#EBC7E7] rounded-lg text-xl p-2 h-24" key={`option${count}`} onClick={() => { onOptionClick(value, setAnswer, updateData, qData, setIsCorrect)}}>{value}</button>
 }
 
 export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayProps) {
@@ -95,18 +94,18 @@ export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayPr
   shuffleArray(buttons);
 
   return (
-    <div id="question-options-container" className="translate-y-2/3">
+    <div id="question-options-container" className="translate-y-1/2">
       <div id='question-display' className="bg-theme-black bg-opacity-80 rounded-3xl m-auto w-[800px] my-5 py-5">
         <div id="question-headers" className="flex flex-row space-between justify-evenly pt-6">
           <h1 className="text-[25px] -translate-x-[103px]">{qData.id}</h1>
           <TagContainer tagNames={qData.topics}/>
           <DotContainer difficulty={qData.difficulty}/>
         </div>
-        <div id="question-content" className="pb-6 text-xl -translate-x-[15px]">
+        <div id="question-content" className="pb-6 text-xl">
           {qData.question}
         </div>
       </div>
-      <div id='options-display'>
+      <div className='grid grid-cols-2 grid-rows-2 gap-6 w-[800px] justify-center m-auto mt-10'>
         {buttons}
       </div>
     </div>

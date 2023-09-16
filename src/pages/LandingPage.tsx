@@ -1,6 +1,7 @@
 import React, {useState, createContext, useContext} from "react";
 import { useNavigate, Link } from "react-router-dom"
 import { TopicSelection } from "./TopicSelection";
+import { MdOutlineAutoGraph } from "react-icons/md";
 
 
 
@@ -24,6 +25,7 @@ export function NewLandingPage() {
                 <h1 className="text-3xl font-semibold mb-2">&lt; Olliebot &gt;</h1>
 
                 <h2 className="text-xl font-normal text-theme-pink">🦦your best programming companion🦦</h2>
+
             </div>
             {/* boxes */}
 
@@ -51,7 +53,9 @@ export function NewLandingPage() {
                 </Link>
                 
             </div>
-           
+            <button onClick={() => navigate('/your_stats')} className="bg-theme-black rounded-full absolute right-10 bottom-10 p-3 hover:bg-theme-red">
+                <MdOutlineAutoGraph className="w-20 h-20"/>
+            </button>
         </div>
     )
  }

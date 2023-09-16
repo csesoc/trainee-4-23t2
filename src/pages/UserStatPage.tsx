@@ -2,6 +2,7 @@ import { collection, getDocs, query } from "firebase/firestore";
 import UserStatCard from "../components/UserStatCard";
 import { database } from "../firebase";
 import { useEffect, useState } from "react";
+import { ExitPage } from "../components/ExitButton";
 
 type Counter = {
     answered: number,
@@ -83,15 +84,18 @@ const UserStatPage = () => {
     }
 
     return (
+        <>
+        <ExitPage/>
         <div className="bg-theme-black flex mt-20 p-20 rounded-xl justify-center gap-10">
             <div className="container w-1/2">
                 <h3 className="text-3xl font-bold mb-8">Damn you suck</h3>
                 <div className="text-left text-lg">
                     <p>
-                        Your best topic was {best.topic}, where you attempted {best.answered} out of {best.total} questions.
+                        Your best topic was {best.topic}, where you attempted <b>{Math.min(best.answered,best.total)}</b> out of <b>{best.total}</b> questions.
                     </p>
+                    <br></br>
                     <p>
-                        Keep on working on {worst.topic}! You’ve attempted {worst.answered} out of {worst.total} questions.
+                        Keep on working on {worst.topic}! You’ve attempted <b>{Math.min(worst.answered,worst.total)}</b> out of <b>{worst.total}</b> questions.
                     </p>
                     {/* <p>
                         Your fastest test time is x:xx, which is 14% faster than your previous record of x:xx.
@@ -108,6 +112,7 @@ const UserStatPage = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
