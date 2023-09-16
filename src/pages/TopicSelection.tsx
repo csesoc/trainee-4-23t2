@@ -91,7 +91,16 @@ export function TopicSelection() {
         console.log(difficulty)
     }
     
-    
+    const navigateMode = () => {
+        console.log(location)
+        console.log(mode.mode)
+        if (mode.mode == "practice") {
+            navigate("/practice")
+        } else if (mode.mode == "test") {
+            navigate("/test")
+        }
+    }
+
     return (
         <div>
             {/* topic selection */}
@@ -170,7 +179,9 @@ export function TopicSelection() {
             {/* next page */}
 
             <div className="flex justify-end">
-                <button className="w-32 h-32 rounded-full bg-theme-pink text-3xl font-semibold text-theme-blue md:absolute right-10 bottom-10">
+                <button 
+                onClick={() => navigateMode()}
+                className="w-32 h-32 rounded-full bg-theme-pink text-3xl font-semibold text-theme-blue md:absolute right-10 bottom-10 active:bg-theme-red">
                     <BiSolidRightArrow style={{fontSize:'60px', margin:'auto'}}/>
                 </button>
 

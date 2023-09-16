@@ -39,11 +39,7 @@ export function NewLandingPage() {
                     </button>
                 </Link>
                     
-                    
-
-                    
-                
-               
+                  
                 <Link to="/topic_selection" state={{mode:"test"}} >
                     <button onClick={() => handleClick()} 
                     className="h-3/6 w-4/6 bg-theme-black m-20 rounded-xl text-xl text-theme-pink font-semibold md:w-2/6 hover:bg-theme-red">
@@ -53,9 +49,6 @@ export function NewLandingPage() {
                        
                     </button>
                 </Link>
-                    
-                
-                
                 
             </div>
            
