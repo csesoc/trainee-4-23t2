@@ -7,6 +7,7 @@ interface PracticeQuestionDisplayProps {
   questionData: QuestionData;
   setAnswer: Function;
   updateData: Function;
+  setIsCorrect: Function
 }
 
 // credit to stack overflow for this :)
@@ -67,14 +68,19 @@ function updateStats(qData: QuestionData) {
   localStorage.setItem('userStats', JSON.stringify(userStatJSON));
 }
 
-function onOptionClick(setAnswer: Function, updateData: Function, qData: QuestionData) {
+function onOptionClick(value: string, setAnswer: Function, updateData: Function, qData: QuestionData, setIsCorrect: Function) {
+  if (value == qData.correctAns) {
+    setIsCorrect(true)
+  } else {
+    setIsCorrect(false)
+  }
   setAnswer(true);
   updateData();
   updateStats(qData);
 }
 
-function buttonGenerator(value: string, count: number, setAnswer: Function, updateData: Function, qData: QuestionData) {
-  return <button className="option text-black bg-[#EBC7E7] w-[30%] h-20 m-[1.70%] rounded-lg text-xl" key={`option${count}`} onClick={() => { onOptionClick(setAnswer, updateData, qData)}}>{value}</button>
+function buttonGenerator(value: string, count: number, setAnswer: Function, updateData: Function, qData: QuestionData, setIsCorrect:Function) {
+  return <button className="option text-black bg-[#EBC7E7] w-[30%] h-20 m-[1.70%] rounded-lg text-xl" key={`option${count}`} onClick={() => { onOptionClick(value, setAnswer, updateData, qData, setIsCorrect)}}>{value}</button>
 }
 
 export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayProps) {
@@ -82,10 +88,10 @@ export default function PracticeQuestionDisplay(props: PracticeQuestionDisplayPr
   const buttons : JSX.Element[] = [];
   let count = 0;
   qData.incorrectAns.forEach((iA) => {
-    buttons.push(buttonGenerator(iA, count, props.setAnswer, props.updateData, qData));
+    buttons.push(buttonGenerator(iA, count, props.setAnswer, props.updateData, qData, props.setIsCorrect));
     count++;
   });
-  buttons.push(buttonGenerator(qData.correctAns, count, props.setAnswer, props.updateData, qData));
+  buttons.push(buttonGenerator(qData.correctAns, count, props.setAnswer, props.updateData, qData, props.setIsCorrect));
   shuffleArray(buttons);
 
   return (

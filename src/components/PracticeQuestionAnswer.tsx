@@ -5,13 +5,14 @@ interface PracticeQuestionAnswerProps {
   questionData: QuestionData;
   setQCount: Function;
   dataLength: number;
+  isCorrect: boolean
 }
 
 export default function PracticeQuestionAnswer(props: PracticeQuestionAnswerProps) {
   let qData = props.questionData;
   return (
     <div id='question-answer-next-save-container'>
-      <div id="question-container" className="m-4 bg-theme-black px-4 py-2">
+      <div id="question-container" className={`${props.isCorrect ? 'bg-theme-blue' : 'bg-theme-red' } m-4  px-4 py-2`}>
         <table id="question-answer-display">
           <thead>
             <tr>
