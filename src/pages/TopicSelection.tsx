@@ -18,7 +18,7 @@ export function TopicSelection() {
 
     const mode = location.state;
 
-    const [topics, setTopics] = useState<String[]>([]);
+    const [topics, setTopics] = useState<string[]>([]);
     const [difficulty, setDifficulty] = useState<number>(0);
   
     const [listSelected, setListSelected] = useState<boolean>(false)
@@ -30,11 +30,11 @@ export function TopicSelection() {
     const addTopic = (newTopic : string) => {
        
         
-        if (newTopic == "linked_lists"){
+        if (newTopic == "Linked_lists"){
             setListSelected(!listSelected)
-        } else if (newTopic == "arrays") {
+        } else if (newTopic == "Arrays") {
             setArraySelected(!arraySelected)
-        } else if (newTopic == "others") {
+        } else if (newTopic == "Others") {
             setOtherSelected(!otherSelected)
         }
         
@@ -89,12 +89,12 @@ export function TopicSelection() {
        
     }
     
-    const navigateMode = () => {
+    const navigateMode = (topics: string[]) => {
         
         if (mode.mode == "practice") {
-            navigate("/practice")
+            navigate("/practice", {state:topics})
         } else if (mode.mode == "test") {
-            navigate("/test")
+            navigate("/test", {state:topics})
         }
     }
 
@@ -110,7 +110,7 @@ export function TopicSelection() {
                 alignItems="center">
                 <Grid item xs={8} md={4}>
                     <button 
-                    onClick={() => addTopic("linked_lists")}
+                    onClick={() => addTopic("Linked_lists")}
                     className={`${listSelected ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink `}>
                         <BiLink style={{fontSize:'100px', margin:'auto'}}/>
                         <h1>Linked Lists</h1>
@@ -118,7 +118,7 @@ export function TopicSelection() {
                 </Grid>
                 <Grid item xs={8} md={4}>
                     <button 
-                    onClick={() => addTopic("arrays")}
+                    onClick={() => addTopic("Arrays")}
                     className={`${arraySelected ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink `}>
                         <MdDataArray style={{fontSize:"100px", margin:"auto"}}/>
                         <h1>Arrays</h1>
@@ -127,7 +127,7 @@ export function TopicSelection() {
 
                 <Grid item xs={8} md={4}>
                     <button 
-                    onClick={() => addTopic("others")}
+                    onClick={() => addTopic("Others")}
                     className={`${otherSelected ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black"`}>
                         <BsThreeDots style={{fontSize:"100px", margin:"auto"}}/>
                         <h1>Others</h1>
@@ -177,7 +177,7 @@ export function TopicSelection() {
 
             <div className="flex justify-end">
                 <button 
-                onClick={() => navigateMode()}
+                onClick={() => navigateMode(topics)}
                 className="w-32 h-32 rounded-full bg-theme-pink text-3xl font-semibold text-theme-blue md:absolute right-10 bottom-10 active:bg-theme-red">
                     <BiSolidRightArrow style={{fontSize:'60px', margin:'auto'}}/>
                 </button>
