@@ -6,7 +6,7 @@ import PracticeQuestionAnswer from '../../components/PracticeQuestionAnswer';
 
 import PracticeQuestionDisplay from '../../components/PracticeQuestionDisplay';
 import { useEffect, useState } from 'react';
-
+import { useLocation } from 'react-router-dom';
 import { database } from "../../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { QuestionData } from '../../types';
@@ -14,10 +14,13 @@ import { QuestionData } from '../../types';
 import { getDataStore, setDataStore } from '../../localDataStore';
 
 interface PracticePageProps {
-  topic: string;
+  topic: string[];
 }
 
-export function PracticePage(props: PracticePageProps) {
+export function PracticePage() {
+  let location = useLocation();
+  const topics = location.state;
+
   let localised = localStorage.getItem('qData') as string;
   let [loading, setLoading] = useState<boolean>(!localised);
   const [data, setData] = useState<QuestionData[]>(!localised ? [] : JSON.parse(localised));
@@ -40,12 +43,11 @@ export function PracticePage(props: PracticePageProps) {
     localStorage.setItem('qData', JSON.stringify(jsonifiedData));
   }
 
-  const [answered, setAnswered] = useState<boolean>(!data.length ? false : data[qCount].answered);
+  const [answered, setAnswered] = useState<boolean>(!data.length ? false : data[qCount].answered as boolean);
   
   useEffect(() => {
     async function RetrieveQuestions(topic: string[]) {
       setLoading(true);
-    
       const collectRef = collection(database, '1511');
 
       if (data.length > 0) {
@@ -75,9 +77,10 @@ export function PracticePage(props: PracticePageProps) {
       setData(dataArr);
       setLoading(false);
       localStorage.setItem('qData', JSON.stringify(dataArr));
-    }
 
-    RetrieveQuestions(['Arrays', 'Pointers']);
+    }
+    
+    RetrieveQuestions(topics);
   }, []);
 
   const [isCorrect, setIsCorrect] = useState<boolean>(false)
