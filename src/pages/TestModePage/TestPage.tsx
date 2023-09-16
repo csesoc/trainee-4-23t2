@@ -1,23 +1,20 @@
-import './PracticePage.css';
-import '../../components/css/PracticeQuestionAnswer.css'
-import '../../components/PracticeQuestionAnswer'
+import { useEffect, useState } from "react";
 import { ExitPage } from "../../components/ExitButton";
-import PracticeQuestionAnswer from '../../components/PracticeQuestionAnswer';
-
-import PracticeQuestionDisplay from '../../components/PracticeQuestionDisplay';
-import { useEffect, useState } from 'react';
-
-import { database } from "../../firebase";
+import { QuestionData } from "../../types";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { QuestionData } from '../../types';
+import { database } from "../../firebase";
+import PracticeQuestionDisplay from "../../components/PracticeQuestionDisplay";
+import NextPrev from "../../components/NextPrev";
+import TestQuestionDisplay from "../../components/TestQuestionDisplay";
+import TestPageAnswered from "../../components/TestPageAnswered";
 
-import { getDataStore, setDataStore } from '../../localDataStore';
-
-interface PracticePageProps {
-  topic: string;
+interface TestPageProps {
+    topic: string[];
 }
 
-export function PracticePage(props: PracticePageProps) {
+export function TestPage(props: TestPageProps) {
+  const [finished, setFinished] = useState<Boolean>(false);
+
   let localised = localStorage.getItem('qData') as string;
   let [loading, setLoading] = useState<boolean>(!localised);
   const [data, setData] = useState<QuestionData[]>(!localised ? [] : JSON.parse(localised));
@@ -29,19 +26,21 @@ export function PracticePage(props: PracticePageProps) {
 
   const [qCount, setQCount] = useState<number>(localQCount === null ? 0 : parseInt(localQCount)); 
 
-  function updateData() {
+  function updateData(option: number, optionValue: string) {
     let localisedData = localStorage.getItem('qData') as string;
     let jsonifiedData : QuestionData[] = JSON.parse(localisedData);
 
     jsonifiedData[parseInt(localQCount)].answered = true;
+    jsonifiedData[parseInt(localQCount)].chosenAnswer = option;
+    jsonifiedData[parseInt(localQCount)].chosenAnswerValue = optionValue;
 
     setData(jsonifiedData);
 
     localStorage.setItem('qData', JSON.stringify(jsonifiedData));
   }
 
-  const [answered, setAnswered] = useState<boolean>(!data.length ? false : data[qCount].answered);
-  
+  //const [answered, setAnswered] = useState<boolean>(!data.length ? false : data[qCount].answered as boolean);
+
   useEffect(() => {
     async function RetrieveQuestions(topic: string[]) {
       setLoading(true);
@@ -68,7 +67,8 @@ export function PracticePage(props: PracticePageProps) {
           question: docData.question,
           questionType: docData.questionType,
           topics: docData.topics,
-          answered: false
+          chosenAnswer: -1,
+          chosenAnswerValue: ''
         });
       });
   
@@ -77,14 +77,22 @@ export function PracticePage(props: PracticePageProps) {
       localStorage.setItem('qData', JSON.stringify(dataArr));
     }
 
-    RetrieveQuestions(['Arrays', 'Pointers']);
+    RetrieveQuestions(['Arrays']);
+
   }, []);
 
   return (
     <>
       <ExitPage/>
-      {loading && "Loading..."}
-      {!loading && (answered ? <PracticeQuestionAnswer questionData={data[qCount]} setQCount={setQCount} dataLength={data.length}/> : <PracticeQuestionDisplay questionData={data[qCount]} setAnswer={setAnswered} updateData={updateData}/>)}
+      { loading && 'Loading...' }
+      { !loading && !finished && (
+        <>
+          <TestQuestionDisplay questionData={data[qCount]} updateData={updateData}/> 
+          <NextPrev setQCount={setQCount} dataLength={data.length}/>
+          <button className="mt-150" onClick={() => setFinished(true)}>Finish</button>
+        </>
+      )}
+      { finished && <TestPageAnswered qData={data}/>}
     </>
   )
 }
