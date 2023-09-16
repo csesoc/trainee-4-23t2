@@ -30,7 +30,7 @@ export function TopicSelection() {
     const addTopic = (newTopic : string) => {
        
         
-        if (newTopic == "Linked_lists"){
+        if (newTopic == "Pointers"){
             setListSelected(!listSelected)
         } else if (newTopic == "Arrays") {
             setArraySelected(!arraySelected)
@@ -103,17 +103,17 @@ export function TopicSelection() {
             {/* topic selection */}
             <div className="flex-col justify-center">
                 <h1 className="text-3xl font-semibold mb-2"> &lt;choose your topic!&gt;</h1>
-                <h2 className="text-xl font-normal mb-2 text-theme-pink">linked lists, arrays and more</h2>
+                <h2 className="text-xl font-normal mb-2 text-theme-pink">pointers, arrays and more</h2>
             </div>
             <Grid container spacing={2}
                 justifyContent="center"
                 alignItems="center">
                 <Grid item xs={8} md={4}>
                     <button 
-                    onClick={() => addTopic("Linked_lists")}
+                    onClick={() => addTopic("Pointers")}
                     className={`${listSelected ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink `}>
                         <BiLink style={{fontSize:'100px', margin:'auto'}}/>
-                        <h1>Linked Lists</h1>
+                        <h1>Pointers</h1>
                     </button>
                 </Grid>
                 <Grid item xs={8} md={4}>

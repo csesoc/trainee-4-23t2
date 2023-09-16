@@ -7,12 +7,16 @@ import PracticeQuestionDisplay from "../../components/PracticeQuestionDisplay";
 import NextPrev from "../../components/NextPrev";
 import TestQuestionDisplay from "../../components/TestQuestionDisplay";
 import TestPageAnswered from "../../components/TestPageAnswered";
+import { useLocation } from "react-router-dom";
 
 interface TestPageProps {
     topic: string[];
 }
 
-export function TestPage(props: TestPageProps) {
+export function TestPage() {
+  let location = useLocation();
+  const topics = location.state;
+  
   const [finished, setFinished] = useState<Boolean>(false);
 
   let localised = localStorage.getItem('qData') as string;
@@ -77,7 +81,7 @@ export function TestPage(props: TestPageProps) {
       localStorage.setItem('qData', JSON.stringify(dataArr));
     }
 
-    RetrieveQuestions(['Arrays']);
+    RetrieveQuestions(topics);
 
   }, []);
 

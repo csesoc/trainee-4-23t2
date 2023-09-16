@@ -48,7 +48,6 @@ export function PracticePage() {
   useEffect(() => {
     async function RetrieveQuestions(topic: string[]) {
       setLoading(true);
-      console.log(topics)
       const collectRef = collection(database, '1511');
 
       if (data.length > 0) {
