@@ -72,7 +72,9 @@ export interface QuestionData {
     question: string;
     questionType: string[];
     topics: string[];
-    answered: boolean;
+    answered?: boolean;
+    chosenAnswer?: number;
+    chosenAnswerValue?: string;
 }
 
 export interface UserStats {
