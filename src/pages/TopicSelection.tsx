@@ -20,9 +20,23 @@ export function TopicSelection() {
 
     const [topics, setTopics] = useState<String[]>([]);
     const [difficulty, setDifficulty] = useState<number>(0);
+  
+    const [listSelected, setListSelected] = useState<boolean>(false)
 
+    const [otherSelected, setOtherSelected] = useState<boolean>(false)
+    
+    const [arraySelected, setArraySelected] = useState<boolean>(false)
+    
     const addTopic = (newTopic : string) => {
-        console.log(newTopic);
+       
+        
+        if (newTopic == "linked_lists"){
+            setListSelected(!listSelected)
+        } else if (newTopic == "arrays") {
+            setArraySelected(!arraySelected)
+        } else if (newTopic == "others") {
+            setOtherSelected(!otherSelected)
+        }
         
         let copy = [...topics];
 
@@ -34,19 +48,55 @@ export function TopicSelection() {
 
         setTopics(copy);
 
-        console.log(copy)
-
+       
+       
        
     }
 
-   
+   const [level1, setLevel1] = useState<boolean>(false);
+   const [level2, setLevel2] = useState<boolean>(false);
+   const [level3, setLevel3] = useState<boolean>(false);
+
     const changeDiff = (diff:number) => {
-        console.log("hi"+difficulty)
+        if (diff === 1) {
+            if (level3) {
+                setLevel3(false)
+            } 
+            if (level2) {
+                setLevel2(false)
+            }
+            setLevel1(!level1)
+        } else if (diff === 2) {
+            if (level1) {
+                setLevel1(false)
+            } 
+            if (level3) {
+                setLevel3(false)
+            }
+            setLevel2(!level2)
+        } else if (diff === 3) {
+            if (level1) {
+                setLevel1(false)
+            } 
+            if (level2) {
+                setLevel2(false)
+            }
+            setLevel3(!level3)
+        }
+        
         setDifficulty(diff);
         
-        console.log(difficulty)
+       
     }
     
+    const navigateMode = () => {
+        
+        if (mode.mode == "practice") {
+            navigate("/practice")
+        } else if (mode.mode == "test") {
+            navigate("/test")
+        }
+    }
 
     return (
         <div>
@@ -61,7 +111,7 @@ export function TopicSelection() {
                 <Grid item xs={8} md={4}>
                     <button 
                     onClick={() => addTopic("linked_lists")}
-                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black">
+                    className={`${listSelected ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink `}>
                         <BiLink style={{fontSize:'100px', margin:'auto'}}/>
                         <h1>Linked Lists</h1>
                     </button>
@@ -69,7 +119,7 @@ export function TopicSelection() {
                 <Grid item xs={8} md={4}>
                     <button 
                     onClick={() => addTopic("arrays")}
-                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black">
+                    className={`${arraySelected ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink `}>
                         <MdDataArray style={{fontSize:"100px", margin:"auto"}}/>
                         <h1>Arrays</h1>
                     </button>
@@ -78,7 +128,7 @@ export function TopicSelection() {
                 <Grid item xs={8} md={4}>
                     <button 
                     onClick={() => addTopic("others")}
-                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black">
+                    className={`${otherSelected ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black"`}>
                         <BsThreeDots style={{fontSize:"100px", margin:"auto"}}/>
                         <h1>Others</h1>
                     </button>
@@ -98,7 +148,7 @@ export function TopicSelection() {
                 <Grid item xs={8} md={4}>
                     <button 
                     onClick={() => changeDiff(1)}
-                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black">
+                    className={`${level1 ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black`}>
                         <TbFishBone style={{fontSize:'100px', margin:'auto'}}/>
                         
                     </button>
@@ -106,7 +156,7 @@ export function TopicSelection() {
                 <Grid item xs={8} md={4}>
                     <button 
                     onClick={() => changeDiff(2)}
-                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-3xl font-semibold text-theme-pink active:bg-theme-black">
+                    className={`${level2 ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-3xl font-semibold text-theme-pink active:bg-theme-black`}>
                         <TbFishBone style={{fontSize:'70px', margin:'auto'}}/>
                         <TbFishBone style={{fontSize:'70px', margin:'auto'}}/>
                     </button>
@@ -115,7 +165,7 @@ export function TopicSelection() {
                 <Grid item xs={8} md={4}>
                     <button 
                     onClick={() => changeDiff(3)}
-                    className="border-4 border-red w-40 h-40 bg-theme-blue rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black">
+                    className={`${level3 ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black`}>
                         <TbFishBone style={{fontSize:'50px', margin:'auto'}}/>
                         <TbFishBone style={{fontSize:'50px', margin:'auto'}}/>
                         <TbFishBone style={{fontSize:'50px', margin:'auto'}}/>
@@ -126,7 +176,9 @@ export function TopicSelection() {
             {/* next page */}
 
             <div className="flex justify-end">
-                <button className="w-32 h-32 rounded-full bg-theme-pink text-3xl font-semibold text-theme-blue md:absolute right-10 bottom-10">
+                <button 
+                onClick={() => navigateMode()}
+                className="w-32 h-32 rounded-full bg-theme-pink text-3xl font-semibold text-theme-blue md:absolute right-10 bottom-10 active:bg-theme-red">
                     <BiSolidRightArrow style={{fontSize:'60px', margin:'auto'}}/>
                 </button>
 
