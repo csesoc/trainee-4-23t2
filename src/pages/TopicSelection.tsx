@@ -28,7 +28,7 @@ export function TopicSelection() {
     const [arraySelected, setArraySelected] = useState<boolean>(false)
     
     const addTopic = (newTopic : string) => {
-        console.log(newTopic);
+       
         
         if (newTopic == "linked_lists"){
             setListSelected(!listSelected)
@@ -48,9 +48,7 @@ export function TopicSelection() {
 
         setTopics(copy);
 
-        console.log("Linked lists " + listSelected)
-        console.log("arrays " + arraySelected)
-
+       
        
        
     }
@@ -85,15 +83,14 @@ export function TopicSelection() {
             }
             setLevel3(!level3)
         }
-        console.log("hi"+difficulty)
+        
         setDifficulty(diff);
         
-        console.log(difficulty)
+       
     }
     
     const navigateMode = () => {
-        console.log(location)
-        console.log(mode.mode)
+        
         if (mode.mode == "practice") {
             navigate("/practice")
         } else if (mode.mode == "test") {
