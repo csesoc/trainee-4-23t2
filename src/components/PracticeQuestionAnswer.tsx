@@ -6,6 +6,7 @@ interface PracticeQuestionAnswerProps {
   questionData: QuestionData;
   setQCount: Function;
   dataLength: number;
+  isCorrect: boolean
 }
 
 export default function PracticeQuestionAnswer(props: PracticeQuestionAnswerProps) {

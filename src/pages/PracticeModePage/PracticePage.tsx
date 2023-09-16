@@ -80,11 +80,14 @@ export function PracticePage(props: PracticePageProps) {
     RetrieveQuestions(['Arrays', 'Pointers']);
   }, []);
 
+  const [isCorrect, setIsCorrect] = useState<boolean>(false)
+  
+  console.log(isCorrect)
   return (
     <>
       <ExitPage/>
       {loading && "Loading..."}
-      {!loading && (answered ? <PracticeQuestionAnswer questionData={data[qCount]} setQCount={setQCount} dataLength={data.length}/> : <PracticeQuestionDisplay questionData={data[qCount]} setAnswer={setAnswered} updateData={updateData}/>)}
+      {!loading && (answered ? <PracticeQuestionAnswer questionData={data[qCount]} setQCount={setQCount} dataLength={data.length} isCorrect={isCorrect}/> : <PracticeQuestionDisplay questionData={data[qCount]} setAnswer={setAnswered} updateData={updateData} setIsCorrect={setIsCorrect}/>)}
     </>
   )
 }
