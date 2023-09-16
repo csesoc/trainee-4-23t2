@@ -4,6 +4,7 @@ import UserStatPage from "./pages/UserStatPage"
 import { NewLandingPage } from "./pages/LandingPage"
 import { PracticePage } from "./pages/PracticeModePage/PracticePage"
 import { TopicSelection } from "./pages/TopicSelection"
+import { TestPage } from "./pages/TestModePage/TestPage"
 
 export function App() {
     return (
@@ -13,6 +14,7 @@ export function App() {
             <Route path="/your_stats" element={<UserStatPage/>}/>
             <Route path="/practice" element={<PracticePage topic=""/>}></Route>
             <Route path="/topic_selection" element={<TopicSelection/>}></Route>
+            <Route path="/test" element={<TestPage/>}></Route>
         </Routes>
     )
 }
