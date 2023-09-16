@@ -34,7 +34,7 @@ export function TopicSelection() {
             setListSelected(!listSelected)
         } else if (newTopic == "Arrays") {
             setArraySelected(!arraySelected)
-        } else if (newTopic == "Others") {
+        } else if (newTopic == "Other") {
             setOtherSelected(!otherSelected)
         }
         
@@ -127,10 +127,10 @@ export function TopicSelection() {
 
                 <Grid item xs={8} md={4}>
                     <button 
-                    onClick={() => addTopic("Others")}
+                    onClick={() => addTopic("Other")}
                     className={`${otherSelected ? 'bg-theme-black' : 'bg-theme-blue'} border-4 border-red w-40 h-40 rounded-xl text-xl font-semibold text-theme-pink active:bg-theme-black"`}>
                         <BsThreeDots style={{fontSize:"100px", margin:"auto"}}/>
-                        <h1>Others</h1>
+                        <h1>Other</h1>
                     </button>
                 </Grid>
             </Grid>
